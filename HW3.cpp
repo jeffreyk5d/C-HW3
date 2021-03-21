@@ -1,4 +1,4 @@
-﻿// HW3.cpp : 定義主控台應用程式的進入點。
+// HW3.cpp : 定義主控台應用程式的進入點。
 //
 
 //#include "stdafx.h"
@@ -82,20 +82,40 @@ void addArrayBasedPoly(polynomialTerm a[], polynomialTerm b[], polynomialTerm d[
 	int a_posi = 0;																  //紀錄a已放入d資料的位置
 	int b_posi = 0;																  //紀錄b已放入d資料的位置
 	int d_posi = 0;																  //紀錄d已被放入的位置
-	while (a[a_posi].coef != 0 && a[a_posi].expo != 0 && b[b_posi].coef != 0 && b[b_posi].expo != 0) {
+	while (a[a_posi].coef != 0 || a[a_posi].expo != 0 || b[b_posi].coef != 0 || b[b_posi].expo != 0) {
 		if (a[a_posi].expo == b[b_posi].expo) {
-			d[d_posi].coef = a[a_posi].coef + b[b_posi].coef;
-			d[d_posi].expo = a[a_posi].expo + b[b_posi].expo;
+			d[d_posi].coef = a[a_posi].coef + b[b_posi].coef;			
+			d[d_posi].expo = a[a_posi].expo;
+			d_posi++;
+			b_posi++;
+			a_posi++;
 		}
-		else if () {
-
+		else if (a[a_posi].expo>b[b_posi].expo) {
+			d[d_posi].coef=a[a_posi].coef;
+			d[d_posi].expo = a[a_posi].expo;
+			d_posi++;
+			a_posi++;
 		}
-		else if () {
-
+		else if (a[a_posi].expo < b[b_posi].expo) {
+			d[d_posi].coef = b[b_posi].coef;
+			d[d_posi].expo = b[b_posi].expo;
+			d_posi++;
+			b_posi++;
 		}
 		if (a[a_posi].coef == 0 && a[a_posi].expo == 0) {
 			while (b[b_posi].coef != 0||b[b_posi].expo!=0) {
-				
+				d[d_posi].coef = b[b_posi].coef;
+				d[d_posi].expo = b[b_posi].expo;
+				d_posi++;
+				b_posi++;
+			}
+		}
+		if (b[b_posi].coef == 0 && b[b_posi].expo == 0) {
+			while (a[a_posi].coef != 0 || a[a_posi].expo != 0) {
+				d[d_posi].coef = a[a_posi].coef;
+				d[d_posi].expo = a[a_posi].expo;
+				d_posi++;
+				a_posi++;
 			}
 		}
 	}
